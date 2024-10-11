@@ -1,13 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Колесо фортуны</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="./style.css">
 </head>
-<body>
-  
+
+<body class="page">
+  <div class="page__wrapper">
+    <main class=" main page__container page__content container">
+      <section class="page__column">
+        <div class="main__logo">
+          <div class="main__logo-image">
+            <img class="image" src="./img/logo_blue.png" alt="">
+          </div>
+          <div class="main__logo-text">Онлайн-школа программирования
+            для детей и подростков</div>
+        </div>
+        <div class="main__vr">
+          <img class="image" src="./img/vr.png" alt="">
+        </div>
+        <p class="main__title"><span class="blue">Беспроигрышное</span> колесо фортуны</p>
+        <p class="main__subtitle">Твой шанс выиграть бесплатное обучение в школе программирования, виртуальные
+          тренажеры,
+          подарочные карты, а также уникальная возможность получить шлем Pico!</p>
+        <div class="button main__button">Крутить</div>
+      </section>
+      <section class="page__column">
+        <div class="page__wheel wheel">
+          <div class="wheel__shadow">
+            <img class="image" src="./img/wheel_shadow.png" alt="">
+          </div>
+          <div class="wheel__ticker">
+            <img class="image" src="./img/ticker.png" alt="">
+          </div>
+          <div class="wheel__body">
+            <img class="image" src="./img/wheel.png" alt="">
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__clip">
+        <img class="footer__clip_desk image" src="./img/footer_clip.png" alt="">
+        <img class="footer__clip_mob image" src="./img/footer_clip_mob.png" alt="">
+      </div>
+      <div class="footer__wrapper">
+        <div class="footer__body container">
+          <div class="footer__logo">
+            <div class="footer__logo-image">
+              <img class="image" src="./img/logo_white.png" alt="Robotex">
+            </div>
+            <div class="footer__logo-text">Онлайн-школа программирования
+              для детей и подростков</div>
+          </div>
+          <div class="footer__links">
+            <a class="footer__link" href="#">Договор публичной оферты</a>
+            <a class="footer__link" href="#">Политика конфиденциальности</a>
+          </div>
+          <div class="footer__copy">
+            © Robotex 2024
+          </div>
+          <div class="page__robot robot">
+            <div class="robot__body">
+              <img class="image" src="./img/robot.png" alt="">
+            </div>
+            <div class="robot__shadow">
+              <img class="image" src="./img/robot_shadow.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
   <script src="./main.js"></script>
 </body>
+
 </html>
