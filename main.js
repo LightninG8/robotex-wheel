@@ -24,8 +24,8 @@
   localStorage.getItem("dealSpins")
     ? localStorage.getItem("dealSpins")
     : localStorage.setItem("dealSpins", 0);
-  
-    localStorage.getItem("droppedPrizeIndex")
+
+  localStorage.getItem("droppedPrizeIndex")
     ? localStorage.getItem("droppedPrizeIndex")
     : localStorage.setItem("droppedPrizeIndex", -1);
 
@@ -38,7 +38,6 @@
   // Переменные приложения
   let isLoading = true;
   let isInfiniteSpins = true;
-
 
   // ========== ИЗМЕНЕНИЕ ПЕРЕМЕННЫХ ==========
   function setAvailableSpins(value) {
@@ -55,7 +54,6 @@
     droppedPrizeIndex = value;
     localStorage.setItem("droppedPrizeIndex", droppedPrizeIndex);
   }
-  
 
   function setIsPageLoading(value) {
     isLoading = value;
@@ -158,14 +156,12 @@
 
   await fakeFetch();
 
-  
-
   // ========== ПОПАП ==========
   function showPrizePopup(index) {
     const prize = prizes[index];
 
     popupWrapperElem.classList.add("active");
-    popupNameElem.textContent = prize.title;  
+    popupNameElem.textContent = prize.title;
     popupImageElem.src = `./img/prize_${index}.png`;
   }
 
@@ -261,6 +257,11 @@
       return;
     }
 
+    wheelBodyElem.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+
     isSpinning = true;
 
     const angle = getElemRotationAngle(wheelBodyElem);
@@ -310,12 +311,11 @@
 
     // Показываем попап
     setDroppedPrizeIndex(prizeIndex);
-  
+
     setTimeout(() => {
       showPrizePopup(prizeIndex);
     }, 200);
   }
-
 
   // ========== ПЕРВИЧНАЯ НАСТРОЙКА DOM ==========
   if (droppedPrizeIndex != -1 && !isInfiniteSpins) {
@@ -330,8 +330,4 @@
 
   // Конец вращения
   wheelBodyElem.addEventListener("transitionend", onWheelAnimationEnd);
-
-
-
-  
 })();
