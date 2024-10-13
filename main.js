@@ -13,7 +13,12 @@
   const popupWrapperElem = document.querySelector(".page__popup");
   const popupImageElem = document.querySelector(".popup__image img");
   const popupNameElem = document.querySelector(".popup__name");
+  const popupPrizeElem = document.querySelector(".popup__prize");
+  const popupFormElem = document.querySelector(".popup__form");
 
+  const formInputNameElem = document.querySelector(".input-name");
+  const formInputEmailElem = document.querySelector(".input-email");
+  const formInputPhoneElem = document.querySelector(".input-phone");
   // Прелоадер
   const preloaderElem = document.querySelector(".page__preloader");
 
@@ -37,7 +42,7 @@
 
   // Переменные приложения
   let isLoading = true;
-  let isInfiniteSpins = true;
+  const isInfiniteSpins = false;
 
   // ========== ИЗМЕНЕНИЕ ПЕРЕМЕННЫХ ==========
   function setAvailableSpins(value) {
@@ -114,55 +119,45 @@
     );
   };
 
-  // ========== СПИСОК ПРИЗОВ ==========
-  let prizes = [];
-
-  function fakeFetch() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(
-          (() => {
-            setIsPageLoading(false);
-
-            prizes = [
-              { title: "Подарочная карта в Роблокс", dropChance: 1 },
-              { title: "Аксессуар в подарок Роблокс", dropChance: 1 },
-              { title: "Solo - онлайн тренажер на клавиатуре", dropChance: 1 },
-              { title: "Подборка книг для юных программистов", dropChance: 1 },
-              { title: "Литрес подарочная карта на 20 евро", dropChance: 1 },
-              {
-                title: "Создание индивидуального проекта с преподавателем",
-                dropChance: 1,
-              },
-              { title: "Скидка 50% на месяц обучения в школе", dropChance: 1 },
-              { title: "Бесплатный курс на месяц", dropChance: 1 },
-              { title: "1 бесплатное занятие с группой", dropChance: 1 },
-              { title: "Литрес подарочная карта на 10 евро", dropChance: 1 },
-              { title: "Подборка книг по психологии", dropChance: 1 },
-              {
-                title: "Подборка бесплатных тренажеров клавиатура",
-                dropChance: 1,
-              },
-              {
-                title: "Подборка виртуальных технических музеев",
-                dropChance: 1,
-              },
-            ];
-          })()
-        );
-      }, 1000);
-    });
+  // ========== DOM ==========
+  if (!localStorage.getItem("email")) {
+    preloaderElem.classList.remove("active");
+    showFormPopup();
   }
 
-  await fakeFetch();
+  // ========== СПИСОК ПРИЗОВ ==========
+  function getPrizes() {
+    return fetch(
+      "https://script.google.com/macros/s/AKfycbxHque100dE_-qFRcipcWA8189vUP8K8y-ljaw3ivfWj-_sTNI5yGrNye6usGpKACHW/exec"
+    )
+      .then((body) => body.json())
+      .then((json) => {
+        return json.map((el) => ({
+          id: el[0],
+          title: el[1],
+          dropChance: el[3] <= 0 ? 0 : el[2],
+        }));
+      });
+  }
+
+  const prizes = await getPrizes();
+  setIsPageLoading(false);
 
   // ========== ПОПАП ==========
   function showPrizePopup(index) {
     const prize = prizes[index];
 
+    popupFormElem.classList.remove("active");
+    popupPrizeElem.classList.add("active");
     popupWrapperElem.classList.add("active");
     popupNameElem.textContent = prize.title;
     popupImageElem.src = `./img/prize_${index}.png`;
+  }
+
+  function showFormPopup() {
+    popupFormElem.classList.add("active");
+    popupPrizeElem.classList.remove("active");
+    popupWrapperElem.classList.add("active");
   }
 
   // ========== КОЛЕСО ==========
@@ -288,6 +283,26 @@
 
       // Засчитываем результат
       saveSpinsCount();
+
+      // Показываем попап
+      setDroppedPrizeIndex(prizeIndex);
+
+      fetch(
+        "https://script.google.com/macros/s/AKfycbxHque100dE_-qFRcipcWA8189vUP8K8y-ljaw3ivfWj-_sTNI5yGrNye6usGpKACHW/exec?" +
+          new URLSearchParams({
+            name: localStorage.getItem("name"),
+            email: localStorage.getItem("email"),
+            phone: localStorage.getItem("phone"),
+            prize: prizes[prizeIndex].id,
+          }).toString(),
+        {
+          method: "POST",
+        }
+      );
+
+      setTimeout(() => {
+        showPrizePopup(prizeIndex);
+      }, 6000);
     }, 0);
   }
 
@@ -308,20 +323,6 @@
     wheelBodyElem.style.setProperty("--rotate", rotation);
     // делаем кнопку снова активной
     isSpinning = false;
-
-    // Показываем попап
-    setDroppedPrizeIndex(prizeIndex);
-
-    setTimeout(() => {
-      showPrizePopup(prizeIndex);
-    }, 200);
-  }
-
-  // ========== ПЕРВИЧНАЯ НАСТРОЙКА DOM ==========
-  if (droppedPrizeIndex != -1 && !isInfiniteSpins) {
-    spinButtonElem.style.pointerEvents = "none";
-    wheelBodyElem.classList.remove("anim");
-    showPrizePopup(droppedPrizeIndex);
   }
 
   // ---------- Обработчики событий ----------
@@ -330,4 +331,27 @@
 
   // Конец вращения
   wheelBodyElem.addEventListener("transitionend", onWheelAnimationEnd);
+
+  popupFormElem.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = formInputNameElem.value;
+    const email = formInputEmailElem.value;
+    const phone = formInputPhoneElem.value;
+
+    console.log(name, email, phone);
+
+    localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
+    localStorage.setItem("phone", phone);
+
+    popupWrapperElem.classList.remove("active");
+  });
+
+  // ========== ПЕРВИЧНАЯ НАСТРОЙКА DOM ==========
+  if (droppedPrizeIndex != -1 && !isInfiniteSpins) {
+    spinButtonElem.style.pointerEvents = "none";
+    wheelBodyElem.classList.remove("anim");
+    showPrizePopup(droppedPrizeIndex);
+  }
 })();

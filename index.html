@@ -85,23 +85,52 @@
     <section class="page__popup popup">
       <div class="popup__bg"></div>
       <div class="popup__body">
-        <div class="popup__header">
-          <div class="popup__image">
-            <img class="image" src="./img/karta_litres.png" alt="">
+        <div class="popup__block popup__prize">
+          <div class="popup__header">
+            <div class="popup__image">
+              <img class="image" src="./img/karta_litres.png" alt="">
+            </div>
+            <div class="popup__name">Подарочная карта Литрес на 10 евро</div>
           </div>
-          <div class="popup__name">Подарочная карта Литрес на 10 евро</div>
+          <div class="popup__title">Поздравляем, этот редкий приз получили всего <span
+              class="new-line"><br /></span><span class="blue">4% пользователей</span>!</div>
+          <div class="popup__subtitle">Подарок будет рассекречен и передан вам в конце пробного занятия.<br />Если вы
+            пропускаете или переносите пробный урок, то приз сгорает!</div>
+          <!-- <div class="popup__buttons">
+            <div class="button prize-btn">Записаться</div>
+            <div class="button refuse-btn">Отказаться</div>
+          </div> -->
         </div>
-        <div class="popup__title">Поздравляем, этот редкий приз получили всего <span class="new-line"><br/></span><span class="blue">4% пользователей</span>!</div>
-        <div class="popup__subtitle">Подарок будет рассекречен и передан вам в конце пробного занятия.<br/>Если вы пропускаете или переносите пробный урок, то приз сгорает!</div>
-        <div class="popup__buttons">
-          <div class="button prize-btn">Записаться</div>
-          <div class="button refuse-btn">Отказаться</div>
-        </div>
+        <form class="popup__block popup__form">
+          <div class="popup__title">Заполните информацию о себе</div>
+          <div class="popup__inputs">
+            <input class="popup__input input-name" required type="text" placeholder="Ваше ФИО" />
+            <input class="popup__input input-email" required type="email" placeholder="Ваш email" />
+            <input class="popup__input input-phone" required type="text" placeholder="Ваш телефон" />
+          </div>
+          <button type="submit" class="button form-btn">Продолжить</input>
+        </form>
+
       </div>
     </section>
   </div>
   <div class="page__preloader preloader active">
-    Загрузка...
+    <div class="loadingio-spinner-spinner-2by998twmg8">
+      <div class="ldio-yzaezf3dcmj">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
   </div>
   <div class="preloaded" style="display: none;">
     <img src="./img/prize_0.png" alt="">
