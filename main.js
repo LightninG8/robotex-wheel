@@ -128,7 +128,7 @@
   // ========== СПИСОК ПРИЗОВ ==========
   function getPrizes() {
     return fetch(
-      "https://script.google.com/macros/s/AKfycbxHque100dE_-qFRcipcWA8189vUP8K8y-ljaw3ivfWj-_sTNI5yGrNye6usGpKACHW/exec"
+      "https://script.google.com/macros/s/AKfycbwgLJePywZKmA2G6h1OrRn5QxHerS0qyBn6t6G1iyxMgo55PDz7UY-3YZAhOB8lU1gV/exec"
     )
       .then((body) => body.json())
       .then((json) => {
@@ -288,7 +288,7 @@
       setDroppedPrizeIndex(prizeIndex);
 
       fetch(
-        "https://script.google.com/macros/s/AKfycbxHque100dE_-qFRcipcWA8189vUP8K8y-ljaw3ivfWj-_sTNI5yGrNye6usGpKACHW/exec?" +
+        "https://script.google.com/macros/s/AKfycbwgLJePywZKmA2G6h1OrRn5QxHerS0qyBn6t6G1iyxMgo55PDz7UY-3YZAhOB8lU1gV/exec?" +
           new URLSearchParams({
             name: localStorage.getItem("name"),
             email: localStorage.getItem("email"),
