@@ -150,8 +150,9 @@
     popupFormElem.classList.remove("active");
     popupPrizeElem.classList.add("active");
     popupWrapperElem.classList.add("active");
-    popupNameElem.textContent = prize.title;
-    popupImageElem.src = `./img/prize_${index}.png`;
+    document.querySelector("body").classList.add("popup-active")
+    // popupNameElem.textContent = prize.title;
+    // popupImageElem.src = `./img/prize_${index}.png`;
   }
 
   function showFormPopup() {

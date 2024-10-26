@@ -21,6 +21,10 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+body.popup-active {
+  overflow: hidden;
+}
+
 @media screen and (max-width: 1200px) {
   body {
     background-size: 200%;
@@ -112,6 +116,17 @@ body {
   margin-top: 60px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.vr {
+  position: relative;
+}
+
+.vr__text {
+  position: absolute;
+  width: 200px;
+  bottom: 83%;
+  left: 80%;
 }
 
 .main__title {
@@ -210,6 +225,13 @@ body {
 
   .main__button {
     margin-top: 30px;
+  }
+
+  .vr__text {
+    position: absolute;
+    width: 150px;
+    bottom: 75%;
+    left: 65%;
   }
 }
 
@@ -626,7 +648,7 @@ body {
   padding: 72px 150px 84px 150px;
 
   background-color: #ffffff;
-  background-image: url("./img/popup_star.png");
+  /* background-image: url("./img/popup_star.png"); */
   background-size: 250px;
   background-position-x: 20px;
   background-repeat: no-repeat;
@@ -642,12 +664,11 @@ body {
   display: flex;
   align-items: center;
   gap: 50px;
-  filter: blur(9px);
-  -webkit-filter: blur(9px);
 }
 
 .popup__image {
-  width: 200px;
+  max-width: 346px;
+  width: 100%;
 }
 
 .popup__name {
