@@ -10,11 +10,12 @@
   const wheelBodyElem = document.querySelector(".wheel__body");
 
   // Попап
-  const popupWrapperElem = document.querySelector(".page__popup");
-  const popupImageElem = document.querySelector(".popup__image img");
-  const popupNameElem = document.querySelector(".popup__name");
-  const popupPrizeElem = document.querySelector(".popup__prize");
-  const popupFormElem = document.querySelector(".popup__form");
+  const popupWrapperElem = document.querySelector(".prize-popup.page__popup");
+  const popupPrizeElem = document.querySelector(".prize-popup .popup__prize");
+  const popupFormElem = document.querySelector(".prize-popup .popup__form");
+
+  const picoPopupWrapperElem = document.querySelector(".pico-popup.page__popup");
+  const picoPopupBgElem = document.querySelector(".pico-popup .popup__bg");
 
   const formInputNameElem = document.querySelector(".input-name");
   const formInputEmailElem = document.querySelector(".input-email");
@@ -348,6 +349,15 @@
 
     popupWrapperElem.classList.remove("active");
   });
+
+  prizeButtonElem.addEventListener("click", () => {
+    picoPopupWrapperElem.classList.add("active")
+  });
+
+  picoPopupBgElem.addEventListener("click", () => {
+    picoPopupWrapperElem.classList.remove("active")
+  });
+
 
   // ========== ПЕРВИЧНАЯ НАСТРОЙКА DOM ==========
   if (droppedPrizeIndex != -1 && !isInfiniteSpins) {
