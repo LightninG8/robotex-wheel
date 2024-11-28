@@ -138,10 +138,13 @@
           title: el[1],
           dropChance: el[3] <= 0 ? 0 : el[2],
         }));
+      }).then((arr) => {
+        return arr.filter((el) => el.id)
       });
   }
 
   const prizes = await getPrizes();
+
   setIsPageLoading(false);
 
   // ========== ПОПАП ==========
